@@ -1,5 +1,9 @@
 from turtle import Turtle, Screen
 import random
+import turtle
+
+#zmena farevneho modu
+turtle.colormode(255)
 
 tommy = Turtle()
 tommy.shape("turtle")
@@ -74,8 +78,15 @@ while pohyb != 9:
 
 ##### Random walk / nahodny pohyb tommyho
 
-#list farieb
-farby = ["green", "red", "blue", "yellow", "black", "pink"]
+#list farieb_toto som zrusil, lebo som pouzil tuple radnom color()
+#farby = ["green", "red", "blue", "yellow", "black", "pink"]
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    random_color = (r, g, b)
+    return random_color
 
 #list uhlov otacania tommyho
 otacanie = [0, 45, 90, 135, 180, 270]
@@ -86,10 +97,9 @@ speed = 1
 
 for number in range (200):
     #Nahodna farba
-    random_farba = random.choice(farby)
-    tommy.pencolor(random_farba)
+    tommy.pencolor(random_color())
     #Hrubka ciary sa zvysuje
-    if number <= 15:
+    if number <= 10:
         tommy.pensize(number)
     #Posun o 30
     tommy.forward(30)
