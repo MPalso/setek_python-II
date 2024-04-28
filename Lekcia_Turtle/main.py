@@ -8,6 +8,12 @@ tommy = Turtle()
 tommy.shape("arrow")
 tommy.color("red")
 tommy.pensize(1)
+
+tommy2 = Turtle()
+tommy2.color("green")
+tommy2.shape("arrow")
+tommy2.pensize(1)
+
 ###############################
 #######ukony tommyho krok po korku
 ###################################
@@ -170,6 +176,16 @@ for _ in range(4):
     tommy.left(90)
 
 tommy.end_fill() """
+
+################################
+#####KURHY
+################################
+
+tommy.circle(20)
+
+#range (od priemeru 30 do priemeru 80 po zvacseni o 10)
+for n in range(30, 80, 10):
+    tommy2.circle(n)
 
 
 my_screen = Screen()
