@@ -30,11 +30,18 @@ head.goto(0, 0)
 #....
 head.direction = "stop"
 
-#potrava
+####potrava
+# bude v tvare kruhu
 apple = Turtle("circle")
+# kruh bude cervenej farby
 apple.color("red")
+# pri presune nebude robit ciaru za svojim pohybom, t.j. PRERO HORE // penup
 apple.penup()
+#pociatocny bod
 apple.goto(100, 100)
+
+#casti tela, zatial prazny zoznam
+body_parts = []
 
 
 #vytvorenie funkcie na pohyb
@@ -78,11 +85,25 @@ screen.onkeypress(move_right, "d")
 
 #hlavny cyklus pohybu
 while True:
-    move()
+    
     if head.distance(apple) < 20:
         x = random.randint(-280, 280)
         y = random.randint(-280, 280)
         apple.goto(x, y)
+
+        #pridanie casti tela
+        new_body_part = Turtle("square")
+        new_body_part.speed(0)
+        new_body_part.color("grey")
+        new_body_part.penup()
+        body_parts.append(new_body_part)
+
+    if len(body_parts) > 0:
+        x = head.xcor()
+        y = head.ycor()
+        body_parts[0].goto(x,y)
+
+    move()
     time.sleep(0.1)
     screen.update()
 
