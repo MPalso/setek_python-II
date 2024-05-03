@@ -2,6 +2,10 @@ from turtle import Turtle, Screen
 import time
 import random
 
+#premenne
+score = 0
+highest_score = 0
+
 screen = Screen()
 
 #nastavenie pozadia obrazovky
@@ -39,6 +43,15 @@ apple.color("red")
 apple.penup()
 #pociatocny bod
 apple.goto(100, 100)
+
+#####score
+score_sign = Turtle("square")
+score_sign.speed(0)
+score_sign.color("white")
+score_sign.penup()
+score_sign.hideturtle()
+score_sign.goto(0, 265)
+score_sign.write("Skore: 0 Najvacsie skore: 0", align="center", font=("Arial", 18))
 
 #casti tela, zatial prazny zoznam
 body_parts = []
@@ -103,8 +116,14 @@ while True:
         #po kolizii vyprazdnime  list s castami tela
         body_parts.clear()
 
+        #vynulovanie score
+        score = 0
 
-    
+        score_sign.clear()
+        score_sign.write(f"Skore: {score} Najvacsie skore: {highest_score}", align="center", font=("Arial", 18))
+
+
+    #kolizia hlavy z jablkom / had zje jedlo
     if head.distance(apple) < 20:
         x = random.randint(-280, 280)
         y = random.randint(-280, 280)
@@ -116,6 +135,15 @@ while True:
         new_body_part.color("grey")
         new_body_part.penup()
         body_parts.append(new_body_part)
+
+        # zvysenie score
+        # score = score + 10
+        score += 10
+
+        if score > highest_score:
+            highest_score = score
+        score_sign.clear()
+        score_sign.write(f"Skore: {score} Najvacsie skore: {highest_score}", align="center", font=("Arial", 18))
         
 
     for index in range(len(body_parts) - 1, 0, - 1):
@@ -142,6 +170,10 @@ while True:
 
         #po kolizii vyprazdnime  list s castami tela
             body_parts.clear()
+
+            score = 0
+            score_sign.clear()
+            score_sign.write(f"Skore: {score} Najvacsie skore: {highest_score}", align="center", font=("Arial", 18))
 
     time.sleep(0.1)
     
