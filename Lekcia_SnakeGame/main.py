@@ -43,7 +43,6 @@ apple.goto(100, 100)
 #casti tela, zatial prazny zoznam
 body_parts = []
 
-
 #vytvorenie funkcie na pohyb
 def move():
     if head.direction == "up":
@@ -61,7 +60,6 @@ def move():
     if head.direction == "right":
         x = head.xcor()
         head.setx(x + 20)
-
 
 #vytvorenie funkcie na konkrety pohyb t.j. na zmenu
 def move_up():
@@ -83,8 +81,25 @@ screen.onkeypress(move_down, "s")
 screen.onkeypress(move_left, "a")
 screen.onkeypress(move_right, "d")
 
-#hlavny cyklus pohybu
+#hlavny cyklus 
 while True:
+
+    screen.update()
+
+    #kontrola kolizie s hranou platna
+    if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
+        time.sleep(2)
+        head.goto(0, 0)
+        head.direction = "stop"
+
+        #skryt casti tela
+        for one_body_part in body_parts:
+            one_body_part.goto(1500, 1500)
+
+        #po kolizi vyprazdnime  list s castami tela
+        body_parts.clear()
+
+
     
     if head.distance(apple) < 20:
         x = random.randint(-280, 280)
@@ -97,6 +112,12 @@ while True:
         new_body_part.color("grey")
         new_body_part.penup()
         body_parts.append(new_body_part)
+        
+
+    for index in range(len(body_parts) - 1, 0, - 1):
+        x = body_parts[index - 1].xcor()
+        y = body_parts[index - 1].ycor()
+        body_parts[index].goto(x,y)
 
     if len(body_parts) > 0:
         x = head.xcor()
@@ -105,8 +126,6 @@ while True:
 
     move()
     time.sleep(0.1)
-    screen.update()
-
-    #pokracujem na videu 38
+    
 
 screen.exitonclick()
