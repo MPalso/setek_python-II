@@ -63,16 +63,20 @@ def move():
 
 #vytvorenie funkcie na konkrety pohyb t.j. na zmenu
 def move_up():
-    head.direction = "up"
+    if head.direction != "down":
+        head.direction = "up"
 
 def move_down():
-    head.direction = "down"
+    if head.direction != "up":
+        head.direction = "down"
 
 def move_left():
-    head.direction = "left"
+    if head.direction != "right":
+        head.direction = "left"
 
 def move_right():
-    head.direction = "right"
+    if head.direction != "left":
+        head.direction = "right"
 
 # kliknutie na klavesy
 screen.listen()
@@ -96,7 +100,7 @@ while True:
         for one_body_part in body_parts:
             one_body_part.goto(1500, 1500)
 
-        #po kolizi vyprazdnime  list s castami tela
+        #po kolizii vyprazdnime  list s castami tela
         body_parts.clear()
 
 
@@ -125,6 +129,20 @@ while True:
         body_parts[0].goto(x,y)
 
     move()
+
+    #kolizia do tela samotneho hada
+    for one_body_part in body_parts:
+        if one_body_part.distance(head) < 20:
+            time.sleep(2)
+            head.goto(0, 0)
+            head.direction = "stop"
+            #skryt casti tela
+            for one_body_part in body_parts:
+                one_body_part.goto(1500, 1500)
+
+        #po kolizii vyprazdnime  list s castami tela
+            body_parts.clear()
+
     time.sleep(0.1)
     
 
