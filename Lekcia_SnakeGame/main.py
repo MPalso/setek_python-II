@@ -118,7 +118,6 @@ while True:
 
         #vynulovanie score
         score = 0
-
         score_sign.clear()
         score_sign.write(f"Skore: {score} Najvacsie skore: {highest_score}", align="center", font=("Arial", 18))
 
